@@ -40,7 +40,7 @@ log - send bot logs ❗ admin only
 - `HEROKU_APP_NAME`: For dyno usage in /stats - Optional.
 - `CHANNEL_OR_CONTACT`: your users contact link. give your username. example: HuzunluArtemis
 - `FORCE_SUBSCRIBE_CHANNEL`: forcesub channel. optional. give channel id like `-1006616516165` or channel username like `HuzunluArtemis`
-- Dont use heroku-20 or heroku-18. Use container. Use button.
+- You can use heroku-18, 20, 22 or docker deploy.
 - `PROGRESSBAR_LENGTH`: Progressbar length. See `config.py`.
 - `FINISHED_PROGRESS_STR`: Finished Progress Char. Default: `●`
 - `UN_FINISHED_PROGRESS_STR`: Unfinished Progress Char. Default: `○`
