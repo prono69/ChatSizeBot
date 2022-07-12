@@ -1,8 +1,8 @@
 ## ChatSizeBot
 
-🇹🇷 Kanal / Grup boyutu hesaplayıcı bot
+🇹🇷 Telegram Kanal / Grup boyutu hesaplayıcı bot
 
-🇬🇧 Channel / Group size calculator bot
+🇬🇧 Telegram Channel / Group size calculator bot
 
 Demo in telegram: [@ChatSizeBot](https://t.me/ChatSizeBot)
 
