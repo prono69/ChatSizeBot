@@ -31,6 +31,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
                     '🇹🇷 Kanaldaki son mesajı iletin ya da son mesaj linkini gönderin.' \
                     '\n🇬🇧 Forward the last message on the channel or send the last message link.' \
                     '\nÖrnek / Example: `https://t.me/c/6262626/24234234`'
+                    , disable_web_page_preview=True
                 )
                 return on_task_complete()
             chat_id = match.group(4)
@@ -44,6 +45,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
             duzenlenecek.edit_text(
                     '🇹🇷 Bir kanal ya da grup olmalı.' \
                     '\n🇬🇧 Must be a channel or group.'
+                    , disable_web_page_preview=True
                 )
             return on_task_complete()
         # get access to chat
@@ -53,19 +55,21 @@ def run_task(gelen: Message, duzenlenecek: Message):
             duzenlenecek.edit_text(
                 '🇹🇷 Beni kanalınıza/grubunuza yönetici olarak eklemelisiniz.' \
                     '\n🇬🇧 You must add me to your channel/group as admin.'
+                    , disable_web_page_preview=True
             )
             return on_task_complete()
         except (UsernameInvalid, UsernameNotModified):
-            duzenlenecek.edit_text('Geçersiz kullanıcı adı.')
+            duzenlenecek.edit_text('Geçersiz kullanıcı adı.', disable_web_page_preview=True)
             return on_task_complete()
         except Exception as e:
             LOGGER.exception(e)
-            duzenlenecek.edit_text(f'Errors - {e}')
+            duzenlenecek.edit_text(f'Errors - {e}', disable_web_page_preview=True)
             
         if not gotchat:
             duzenlenecek.edit_text(
                 '🇹🇷 Beni kanalınıza/grubunuza yönetici olarak eklemelisiniz.' \
                     '\n🇬🇧 You must add me to your channel/group as admin.'
+                    , disable_web_page_preview=True
             )
             return on_task_complete()
         infochat = f"💚 **Chat Info / Çet Bilgileri:**" \
@@ -103,7 +107,7 @@ def run_task(gelen: Message, duzenlenecek: Message):
                         f"\nPercent: `% {'{:.7f}'.format((current * 100 / total))}`" \
                         f"\nSpeed: `{hiz} message/sec`" \
                         f'\nBot Uptime: `{TimeFormatter(time.time() - botStartTime)}`'
-                    duzenlenecek.edit_text(text=txt, parse_mode=ParseMode.MARKDOWN)
+                    duzenlenecek.edit_text(text=txt, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
                 except: pass
             # kaydet
             message:Message = None
@@ -171,7 +175,7 @@ def handler(_, message: Message):
     if not AuthUserCheck(message): return
     if ForceSub(message) == 400: return
     # add to quee
-    duz = message.reply_text(f"✅ Your Turn: {len(quee)+1}\nWait. Dont spam with same ID.", quote=True)
+    duz:Message = message.reply_text(f"✅ Your Turn: {len(quee)+1}\nWait. Dont spam with same ID.", quote=True, disable_web_page_preview=True)
     quee.append([message, duz])
     if len(quee) == 1: run_task(message, duz)
 
@@ -184,4 +188,4 @@ def welcome(_, message: Message):
         "\n\n🇬🇧 Hi. Send a channel/group id and I will calculate the full size of all files." \
         "\nClick the last message in the channel / group, copy the message link, paste it to me." \
         f"\n\n**@{Config.CHANNEL_OR_CONTACT}**"
-    message.reply_text(te, parse_mode=ParseMode.MARKDOWN)
+    message.reply_text(te, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
